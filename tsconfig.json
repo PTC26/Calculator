@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    /* הגדרות בסיס */
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler", // <--- להוסיף את השורה הזו
+     "lib": ["ESNext", "DOM"],
+    "ignoreDeprecations": "6.0",
+    /* חיבור לספריות שהתקנו */
+    "types": ["jest", "node"],
+    "esModuleInterop": true,
+    /* סדר בתיקיות */
+    "rootDir": "./",
+    "outDir": "./dist",
+    "sourceMap": true,
+
+    /* בדיקות קפדניות אבל הגיוניות */
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    
+    /* כיבוי ההגדרה שגרמה לשגיאה ב-export */
+    "verbatimModuleSyntax": false
+  },
+  "include": ["src/**/*", "test/**/*"]
+}
