@@ -1,5 +1,7 @@
 export class Calculator {
     calculate(input: string): number {
-        return 0; // מחזירים 0 כדי שהטסט ייכשל בכוונה
+        // כרגע המחשבון לא יודע לעשות כלום
+        // זה יגרום לכל הטסטים של החיבור, חיסור, כפל וכו' להיכשל
+        return 0;
     }
 }
