@@ -2,8 +2,8 @@
   "compilerOptions": {
     /* הגדרות בסיס */
     "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "bundler", // <--- להוסיף את השורה הזו
+   "moduleResolution": "NodeNext",
+"module": "NodeNext",
      "lib": ["ESNext", "DOM"],
     "ignoreDeprecations": "6.0",
     /* חיבור לספריות שהתקנו */

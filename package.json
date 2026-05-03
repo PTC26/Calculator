@@ -2,10 +2,12 @@
   "name": "calculator",
   "version": "1.0.0",
   "description": "You are to solve this assignment using TDD principles. Meaning, all *tests* are to be written before the actual implementation.",
+  "type": "module",
   "main": "index.js",
-  "scripts": {
-    "test": "jest"
-  },
+ "scripts": {
+  "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+  "start": "node --loader ts-node/esm src/main.ts"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -14,6 +16,7 @@
     "@types/node": "^25.6.0",
     "jest": "^30.3.0",
     "ts-jest": "^29.4.9",
+    "ts-node": "^10.9.2",
     "typescript": "^6.0.3"
   }
 }
