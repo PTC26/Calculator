@@ -24,4 +24,19 @@ describe('Calculator Integration Tests', () => {
     it('should throw error on division by zero', () => {
         expect(() => calc.calculate("8+7+9/2/0")).toThrow("Division by zero");
     });
+    it('should respect order of operations (multiplication before addition)', () => {
+        expect(calc.calculate("2+5*8")).toBe(42);
+    });
+
+    it('should handle complex expressions with division and subtraction', () => {
+        expect(calc.calculate("10+4/2-1")).toBe(11);
+    });
+
+    it('should handle decimal points in addition', () => {
+        expect(calc.calculate("1.5+2.5")).toBe(4);
+    });
+
+    it('should calculate multiplication with decimal numbers', () => {
+        expect(calc.calculate("2.5*2")).toBe(5);
+    });
 });
