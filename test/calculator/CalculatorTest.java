@@ -8,10 +8,7 @@ public class CalculatorTest {
     @Test
     void shouldAddTwoNumbers() {
         Calculator calc = new Calculator();
-
-        int result = calc.calculate("1+2");
-
-        assertEquals(3, result);
+        assertEquals(3, calc.calculate("1+2"));
     }
 
 
@@ -63,7 +60,7 @@ public class CalculatorTest {
     @Test
     void shouldHandleUnaryPlus() {
         Calculator calc = new Calculator();
-        assertEquals(5, calc.calculate("2 * +3"));
+        assertEquals(6, calc.calculate("2 * +3"));
     }
     @Test
     void shouldHandleMixedExpression() {
