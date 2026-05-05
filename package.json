@@ -4,19 +4,26 @@
   "description": "You are to solve this assignment using TDD principles. Meaning, all *tests* are to be written before the actual implementation.",
   "type": "module",
   "main": "index.js",
- "scripts": {
-  "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-  "start": "node --loader ts-node/esm src/main.ts"
+"scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "server": "node --loader ts-node/esm src/server.ts",
+    "build": "tsc"
 },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
     "@types/jest": "^30.0.0",
     "@types/node": "^25.6.0",
     "jest": "^30.3.0",
     "ts-jest": "^29.4.9",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
   }
 }
