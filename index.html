@@ -17,32 +17,41 @@
         .equal:hover { background: #2ecc71; }
         .clear { background: #c0392b; }
         .clear:hover { background: #e74c3c; }
+        /* עיצוב ספציפי לכפתור המחיקה */
+        #backspace { background: #444; }
+        #backspace:hover { background: #666; }
     </style>
 </head>
 <body>
     <div class="calculator">
         <input type="text" id="display" readonly>
         <div class="buttons">
+            <!-- שורה 1 -->
             <button class="clear" id="clear">C</button>
+            <button id="backspace">⌫</button>
             <button class="operator" onclick="append('/')">/</button>
             <button class="operator" onclick="append('*')">*</button>
-            <button class="operator" onclick="append('-')">-</button>
             
+            <!-- שורה 2 -->
             <button onclick="append('7')">7</button>
             <button onclick="append('8')">8</button>
             <button onclick="append('9')">9</button>
-            <button class="operator" onclick="append('+')">+</button>
+            <button class="operator" onclick="append('-')">-</button>
             
+            <!-- שורה 3 -->
             <button onclick="append('4')">4</button>
             <button onclick="append('5')">5</button>
             <button onclick="append('6')">6</button>
-            <button onclick="append('.')">.</button>
+            <button class="operator" onclick="append('+')">+</button>
             
+            <!-- שורה 4 -->
             <button onclick="append('1')">1</button>
             <button onclick="append('2')">2</button>
             <button onclick="append('3')">3</button>
-            <button onclick="append('0')">0</button>
+            <button onclick="append('.')">.</button>
             
+            <!-- שורה 5 -->
+            <button onclick="append('0')">0</button>
             <button class="equal" id="calculate">=</button>
         </div>
     </div>
