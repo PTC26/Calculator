@@ -24,5 +24,10 @@ public class CalculatorTest {
         Calculator calculator = new Calculator();
         double result = calculator.calculate("10/5");
         assertEquals(2, result,DELTA);
+    }@Test
+    public void multiplyBeforeAddition() {
+        Calculator calculator = new Calculator();
+        double result = calculator.calculate("10+6*3");
+        assertEquals(28, result,DELTA);
     }
 }
