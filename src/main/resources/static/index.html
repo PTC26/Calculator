@@ -1,0 +1,195 @@
+<!DOCTYPE html> <!-- מגדיר שזה מסמך HTML5 -->
+<html> <!-- תחילת המסמך -->
+
+<head>
+    <title>Calculator</title> <!-- כותרת הדף בדפדפן -->
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea, #764ba2); /* רקע גרדיאנט */
+            display: flex; /* מאפשר יישור אלמנטים */
+            justify-content: center; /* מרכז אופקית */
+            align-items: center; /* מרכז אנכית */
+            height: 100vh; /* גובה כל המסך */
+            font-family: Arial; /* פונט */
+            margin: 0; /* ביטול רווחים חיצוניים */
+        }
+
+        .calc {
+            background: #1e1e2f; /* צבע המחשבון */
+            padding: 20px; /* רווח פנימי */
+            border-radius: 20px; /* פינות מעוגלות */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3); /* צל */
+            width: 280px; /* רוחב */
+            display: flex;
+            flex-direction: column; /* סידור אנכי */
+            align-items: center;
+        }
+
+        .screen {
+            width: 100%;
+            display: flex;
+            justify-content: center; /* מרכז את המסך */
+            margin-bottom: 15px;
+        }
+
+        #display {
+            width: 100%;
+            height: 60px;
+            background: #2c2c3e; /* צבע המסך */
+            color: white; /* צבע טקסט */
+            font-size: 28px; /* גודל טקסט */
+            text-align: right; /* יישור לימין */
+
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: none;
+
+            box-sizing: border-box;
+        }
+
+        .grid {
+            display: grid; /* סידור כפתורים */
+            grid-template-columns: repeat(4, 1fr); /* 4 עמודות */
+            gap: 10px; /* רווח בין כפתורים */
+            width: 100%;
+        }
+
+        button {
+            height: 55px;
+            font-size: 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            background: #3a3a4f;
+            color: white;
+        }
+
+        button:hover {
+            background: #50506a; /* שינוי צבע במעבר עכבר */
+        }
+
+        .op {
+            background: #ff9500; /* צבע אופרטורים */
+        }
+
+        .op:hover {
+            background: #e08900;
+        }
+
+        .equal {
+            background: #00c853;
+            grid-column: span 2; /* תופס 2 עמודות */
+        }
+
+        .delete {
+            background: #ff3b30; /* מחיקה */
+        }
+
+        .clear {
+            background: #9c27b0; /* Clear מלא */
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="calc">
+
+    <div class="screen">
+        <input id="display" disabled /> <!-- שדה תצוגה -->
+    </div>
+
+    <div class="grid">
+        <button onclick="press('7')">7</button> <!-- מוסיף 7 -->
+        <button onclick="press('8')">8</button>
+        <button onclick="press('9')">9</button>
+        <button class="op" onclick="press('/')">&#247;</button> <!-- חילוק -->
+
+        <button onclick="press('4')">4</button>
+        <button onclick="press('5')">5</button>
+        <button onclick="press('6')">6</button>
+        <button class="op" onclick="press('*')">x</button> <!-- כפל -->
+
+        <button onclick="press('1')">1</button>
+        <button onclick="press('2')">2</button>
+        <button onclick="press('3')">3</button>
+        <button class="op" onclick="press('-')">-</button>
+
+        <button class="delete" onclick="deleteLast()">&#9003;</button> <!-- מחיקה תו -->
+        <button onclick="press('0')">0</button>
+        <button onclick="press('.')">.</button> <!-- ✨ נקודה -->
+        <button class="op" onclick="press('+')">+</button>
+
+        <button class="clear" onclick="clearAll()">C</button> <!-- ✨ מחיקה מלאה -->
+        <button class="equal" onclick="calc()">=</button> <!-- חישוב -->
+    </div>
+
+</div>
+
+<script>
+
+    let expr = ""; // שומר את הביטוי (למשל "2+3")
+    let justCalculated = false; // ✨ דגל שמסמן אם לחצו =
+
+    function press(val) { // מופעל בלחיצה על כפתור
+
+        if (justCalculated) { // אם הרגע חישבנו
+            expr = ""; // מאפס ביטוי
+            justCalculated = false; // מבטל מצב חישוב
+        }
+
+        // ✨ טיפול בנקודה
+        if (val === '.') { // אם לחצו נקודה
+
+            let parts = expr.split(/[\+\-\*\/]/); // מפרק לפי אופרטורים
+            let last = parts[parts.length - 1]; // המספר האחרון
+
+            if (last.includes('.')) { // אם כבר יש נקודה
+                return; // לא מוסיפים שוב
+            }
+
+            if (last === "") { // אם התחילו עם נקודה
+                expr += "0"; // מוסיף 0 לפני
+            }
+        }
+
+        expr += val; // מוסיף את הערך לביטוי
+        document.getElementById("display").value = expr; // מציג במסך
+    }
+
+    function deleteLast() {
+        expr = expr.slice(0, -1); // מוחק תו אחרון
+        document.getElementById("display").value = expr;
+    }
+
+    function clearAll() { // ✨ מחיקה מלאה
+        expr = ""; // מאפס ביטוי
+        document.getElementById("display").value = ""; // מנקה מסך
+    }
+
+    async function calc() { // פונקציה אסינכרונית (מחכה לשרת)
+        try {
+            const res = await fetch("/calculate", { // שולח לשרת
+                method: "POST", // סוג בקשה
+                headers: { "Content-Type": "application/json" }, // סוג נתונים
+                body: JSON.stringify({ expression: expr }) // שולח ביטוי
+            });
+
+            const data = await res.json(); // מקבל תשובה
+
+            document.getElementById("display").value = data.result; // מציג תוצאה
+            expr = data.result.toString(); // שומר תוצאה להמשך
+
+            justCalculated = true; // ✨ מסמן שחישבנו
+
+        } catch (e) {
+            document.getElementById("display").value = "Error"; // שגיאה
+            expr = "";
+        }
+    }
+
+</script>
+
+</body>
+</html>

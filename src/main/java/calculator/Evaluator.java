@@ -1,9 +1,7 @@
-package calculator;
+package main.java.calculator;
 
 import java.util.List;
 import java.util.Stack;
-
-import calculator.Token.TokenType;
 
 public class Evaluator {
 
@@ -19,11 +17,11 @@ public class Evaluator {
         try {
             for (Token token : tokens) {
 
-                if (token.getType() == TokenType.NUMBER) {
+                if (token.getType() == Token.TokenType.NUMBER) {
                     numbers.push(token.getValue());
                 }
 
-                else if (token.getType() == TokenType.OPERATOR) {
+                else if (token.getType() == Token.TokenType.OPERATOR) {
 
                     char op = token.getOperator();
 

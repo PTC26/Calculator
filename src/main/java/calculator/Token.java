@@ -1,4 +1,4 @@
-package calculator;
+package main.java.calculator;
 
 public class Token {
 
@@ -11,13 +11,11 @@ public class Token {
     private double value;
     private char operator;
 
-    // מספר
     public Token(TokenType type, double value) {
         this.type = type;
         this.value = value;
     }
 
-    // אופרטור
     public Token(TokenType type, char operator) {
         this.type = type;
         this.operator = operator;

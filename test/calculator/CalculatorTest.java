@@ -1,4 +1,5 @@
 package calculator;
+import main.java.calculator.Calculator;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -112,6 +113,57 @@ public class CalculatorTest {
     void shouldHandleZeroOperations() {
         Calculator calc = new Calculator();
         assertEquals(0, calc.calculate("0+0*5"));
+    }
+
+    @Test
+    void shouldAddDecimals() {
+
+        Calculator calc = new Calculator();
+
+        assertEquals(4.0, calc.calculate("1.5+2.5"));
+    }
+
+    @Test
+    void shouldMultiplyDecimals() {
+
+        Calculator calc = new Calculator();
+
+        assertEquals(3.0, calc.calculate("1.5*2"));
+    }
+
+    @Test
+    void shouldDivideDecimals() {
+
+        Calculator calc = new Calculator();
+
+        assertEquals(2.5, calc.calculate("5.0/2"));
+    }
+
+    @Test
+    void shouldHandleNegativeDecimal() {
+
+        Calculator calc = new Calculator();
+
+        assertEquals(-1.5, calc.calculate("-0.5-1"));
+    }
+
+    @Test
+    void shouldThrowOnDoubleDot() {
+
+        Calculator calc = new Calculator();
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> calc.calculate("1..5+2")
+        );
+    }
+
+    @Test
+    void shouldHandleEndingDot() {
+
+        Calculator calc = new Calculator();
+
+        assertEquals(3.0, calc.calculate("1.+2"));
     }
 
     }

@@ -1,4 +1,4 @@
-package calculator.operations;
+package main.java.operations;
 
 public class MultiplyOperation implements Operation {
 
