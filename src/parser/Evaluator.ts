@@ -4,28 +4,33 @@ export class Evaluator {
     constructor(private operations: Record<string, Operation>) {}
 
     evaluate(tokens: string[]): number {
-        const workTokens = [...tokens];
+        const processedTokens: string[] = [];
 
-        let i = 0;
-        while (i < workTokens.length) {
-            if (workTokens[i] === '*' || workTokens[i] === '/') {
-                const result = this.operations[workTokens[i]].execute(
-                    parseFloat(workTokens[i - 1]),
-                    parseFloat(workTokens[i + 1])
-                );
-                workTokens.splice(i - 1, 3, result.toString());
-                i--;
+        for (let i = 0; i < tokens.length; i++) {
+            const token = tokens[i];
+
+            if (token === '*' || token === '/') {
+                const prevNum = parseFloat(processedTokens.pop()!);
+                const nextNum = parseFloat(tokens[++i]);
+                const result = this.operations[token].execute(prevNum, nextNum);
+                processedTokens.push(result.toString());
+            } else {
+                processedTokens.push(token);
             }
-            i++;
         }
 
-        let finalResult = parseFloat(workTokens[0]);
-        for (let j = 1; j < workTokens.length; j += 2) {
-            finalResult = this.operations[workTokens[j]].execute(
-                finalResult, 
-                parseFloat(workTokens[j + 1])
-            );
+        
+        if (processedTokens.length === 0) return 0;
+
+        let finalResult = parseFloat(processedTokens[0]);
+        
+        for (let j = 1; j < processedTokens.length; j += 2) {
+            const operator = processedTokens[j];
+            const nextValue = parseFloat(processedTokens[j + 1]);
+            
+            finalResult = this.operations[operator].execute(finalResult, nextValue);
         }
+
         return finalResult;
     }
 }

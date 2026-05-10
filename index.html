@@ -17,44 +17,35 @@
         .equal:hover { background: #2ecc71; }
         .clear { background: #c0392b; }
         .clear:hover { background: #e74c3c; }
-        /* עיצוב ספציפי לכפתור המחיקה */
-        #backspace { background: #444; }
-        #backspace:hover { background: #666; }
     </style>
 </head>
 <body>
     <div class="calculator">
         <input type="text" id="display" readonly>
         <div class="buttons">
-            <!-- שורה 1 -->
             <button class="clear" id="clear">C</button>
-            <button id="backspace">⌫</button>
-            <button class="operator" onclick="append('/')">/</button>
-            <button class="operator" onclick="append('*')">*</button>
+            <button class="operator" id="backspace">⌫</button> 
+            <button class="operator btn-input">/</button>
+            <button class="operator btn-input">*</button>
+            <button class="operator btn-input">-</button>
             
-            <!-- שורה 2 -->
-            <button onclick="append('7')">7</button>
-            <button onclick="append('8')">8</button>
-            <button onclick="append('9')">9</button>
-            <button class="operator" onclick="append('-')">-</button>
+            <button class="btn-input">7</button>
+            <button class="btn-input">8</button>
+            <button class="btn-input">9</button>
+            <button class="operator btn-input">+</button>
             
-            <!-- שורה 3 -->
-            <button onclick="append('4')">4</button>
-            <button onclick="append('5')">5</button>
-            <button onclick="append('6')">6</button>
-            <button class="operator" onclick="append('+')">+</button>
+            <button class="btn-input">4</button>
+            <button class="btn-input">5</button>
+            <button class="btn-input">6</button>
+            <button class="btn-input">.</button>
             
-            <!-- שורה 4 -->
-            <button onclick="append('1')">1</button>
-            <button onclick="append('2')">2</button>
-            <button onclick="append('3')">3</button>
-            <button onclick="append('.')">.</button>
+            <button class="btn-input">1</button>
+            <button class="btn-input">2</button>
+            <button class="btn-input">3</button>
+            <button class="btn-input">0</button>
             
-            <!-- שורה 5 -->
-            <button onclick="append('0')">0</button>
             <button class="equal" id="calculate">=</button>
         </div>
     </div>
-    <script type="module" src="./dist/src/ui.js"></script>
-</body>
+<script type="module" src="./dist/src/ui.js"></script></body>
 </html>
